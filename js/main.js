@@ -9,7 +9,7 @@ class BoardSquare {
 
   setColor(color) {
 
-    const faceUpElement = this.element.getElementByClassName('faceup')[0];
+    const faceUpElement = this.element.getElementsByClassName('faceup')[0];
     this.color = color;
     faceUpElement.classList.add(color);
 
@@ -40,28 +40,14 @@ generateHTMLForBoardSquares();
 
 const colorPairs = [];
 
-// function generateColorPairs() {
-//   if (colorPairs.length > 0) {
-//     return colorPairs;
-//   } else {
-//     for (let i = 0; i < 8, i++) {
-//       colorPairs.push('color-' + i);
-//       colorPairs.push('color-' + i);
-//     }
-//     return colorPairs;
-//   }
-// }
-
 function generateColorPairs() {
   if (colorPairs.length > 0) {
     return colorPairs;
   } else {
-    // generates matching pair for each color
     for (let i = 0; i < 8; i++) {
       colorPairs.push('color-' + i);
       colorPairs.push('color-' + i);
     }
-
     return colorPairs;
   }
 }
@@ -88,40 +74,23 @@ function shuffleColors() {
   return shuffle(colorPairs);
 }
 
-// function setUpGame() {
-//   generateHTMLForBoardSquares();
-//
-//   const randomColorPairs = shuffleColors();
-//
-//   const squareElements = document.getElementByClassName("board-square");
-//
-//   for (let i = 0, i < sqaureElements.length, i++) {
-//     const element = squareElements[i];
-//     const color = randomColorPairs[i];
-//
-//     const square = new BoardSquare(element, color)
-//
-//     boardSquares.push(square);
-//   }
-// }
+const boardSquares = [];
 
 function setupGame() {
   generateHTMLForBoardSquares();
 
   const randomColorPairs = shuffleColors();
-  // 1
+
   const squareElements = document.getElementsByClassName("board-square");
 
-  // 2
   for (let i = 0; i < squareElements.length; i++) {
     const element = squareElements[i];
     const color = randomColorPairs[i];
-    // 3
+
     const square = new BoardSquare(element, color)
 
-    // 4
     boardSquares.push(square);
   }
 }
 
-setUpGame();
+setupGame();
