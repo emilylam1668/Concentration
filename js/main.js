@@ -16,34 +16,52 @@ class BoardSquare {
   }
 }
 
-func generateHTMLForBoardSquares () {
+function generateHTMLForBoardSquares() {
   const numberOfSquares = 16;
   let squaresHTML = '';
 
+  // generate HTML for board squares
   for (let i = 0; i < numberOfSquares; i++) {
-    squaresHTML += `
-      <div class="col-3 board-square">
-        <div class="face-container">
-          <div class="facedown"></div>
-          <div class="faceup"></div>
-        </div>
-      </div>`;
+    squaresHTML +=
+      '<div class="col-3 board-square">\n' +
+      '<div class="face-container">\n' +
+      '<div class="facedown"></div>\n' +
+      '<div class="faceup"></div>\n' +
+      '</div>\n' +
+      '</div>\n';
   }
 
+  // insert squares HTML in DOM
   const boardElement = document.getElementById('gameboard');
   boardElement.innerHTML = squaresHTML;
 }
 
+generateHTMLForBoardSquares();
+
 const colorPairs = [];
+
+// function generateColorPairs() {
+//   if (colorPairs.length > 0) {
+//     return colorPairs;
+//   } else {
+//     for (let i = 0; i < 8, i++) {
+//       colorPairs.push('color-' + i);
+//       colorPairs.push('color-' + i);
+//     }
+//     return colorPairs;
+//   }
+// }
 
 function generateColorPairs() {
   if (colorPairs.length > 0) {
     return colorPairs;
   } else {
-    for (let i = 0; i < 8, i++) {
+    // generates matching pair for each color
+    for (let i = 0; i < 8; i++) {
       colorPairs.push('color-' + i);
       colorPairs.push('color-' + i);
     }
+
     return colorPairs;
   }
 }
@@ -69,3 +87,41 @@ function shuffleColors() {
   const colorPairs = generateColorPairs()
   return shuffle(colorPairs);
 }
+
+// function setUpGame() {
+//   generateHTMLForBoardSquares();
+//
+//   const randomColorPairs = shuffleColors();
+//
+//   const squareElements = document.getElementByClassName("board-square");
+//
+//   for (let i = 0, i < sqaureElements.length, i++) {
+//     const element = squareElements[i];
+//     const color = randomColorPairs[i];
+//
+//     const square = new BoardSquare(element, color)
+//
+//     boardSquares.push(square);
+//   }
+// }
+
+function setupGame() {
+  generateHTMLForBoardSquares();
+
+  const randomColorPairs = shuffleColors();
+  // 1
+  const squareElements = document.getElementsByClassName("board-square");
+
+  // 2
+  for (let i = 0; i < squareElements.length; i++) {
+    const element = squareElements[i];
+    const color = randomColorPairs[i];
+    // 3
+    const square = new BoardSquare(element, color)
+
+    // 4
+    boardSquares.push(square);
+  }
+}
+
+setUpGame();
