@@ -37,6 +37,11 @@ class BoardSquare {
     this.isMatched = false;
     this.element.classList.remove('flipped');
   }
+
+  matchFound() {
+    this.isFaceUp = true;
+    this.isMatched = true;
+  }
 }
 
 function generateHTMLForBoardSquares() {
@@ -113,6 +118,32 @@ function setupGame() {
     const square = new BoardSquare(element, color)
 
     boardSquares.push(square);
+  }
+}
+
+let firstFaceupSquare = null;
+
+function squareFlipped() {
+  if (firstFaceupSquare === null) {
+    firstFaceupSquare = square;
+    return
+  }
+
+  if (firstFaceupSquare.color === square.color) {
+    firstFaceupSquare.matchFound();
+    square.matchFound();
+
+    firstFaceupSquare = null;
+  } else {
+    const a = firstFaceupSquare;
+    const b = square;
+
+    firstFaceupSquare = null;
+
+    setTimeout(function() {
+      a.reset();
+      b.reset();
+    }, 400);
   }
 }
 
